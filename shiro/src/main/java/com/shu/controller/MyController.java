@@ -19,9 +19,14 @@ public class MyController {
         return  "user/add";
     }
 
-    @RequestMapping("update")
+    @RequestMapping("/update")
     public String update(ModelMap modelMap){
-
         return  "user/update";
+    }
+
+    @RequestMapping("/toLogin")
+    public String toLogin(ModelMap modelMap){
+
+        return  "login";
     }
 }
