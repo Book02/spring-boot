@@ -32,11 +32,18 @@ public class ShiroConfig {
         //拦截
         filterMap.put("/add","anon");
         filterMap.put("/update","authc");
+
+        //授权
+        filterMap.put("/add","perms[user:add]");
+        filterMap.put("/update","perms[user:update]");
+
         bean. setFilterChainDefinitionMap(filterMap);
 
 
         //若访问时用户未认证，则跳转至登录页面
         bean.setLoginUrl("/toLogin");
+        //若访问时用户未授权，则跳转至未授权页面
+        bean.setUnauthorizedUrl("/noAuth");
         return bean;
 
     }

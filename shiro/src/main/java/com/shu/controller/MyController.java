@@ -1,18 +1,25 @@
 package com.shu.controller;
 
+import com.shu.service.UserService;
+import com.shu.service.UserServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MyController {
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping({"/", "/index"})
     public String toIndex(ModelMap modelMap){
@@ -54,6 +61,12 @@ public class MyController {
             model.addAttribute("msg","密码错误！");
             return "login";
         }
+    }
+
+    @RequestMapping("/noAuth")
+    @ResponseBody
+    public String unauthorized(){
+        return "未授权无法访问此页面";
     }
 
 
